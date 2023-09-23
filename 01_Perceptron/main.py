@@ -11,11 +11,22 @@ X, y = make_classification(n_samples=100, n_features=2, n_redundant=0, n_repeate
 y[y == 0] = -1  # La nostra implementació esta pensada per tenir les classes 1 i -1.
 
 
-perceptron = Perceptron()
+perceptron = Perceptron(eta = 0.001, n_iter = 20)
 perceptron.fit(X, y)  # Ajusta els pesos
 y_prediction = perceptron.predict(X)  # Prediu
 
-#  Resultats
+#  Mostram els resultats
 plt.figure(1)
-plt.scatter(X[:, 0], X[:, 1], c=y_prediction)  # Mostram el conjunt de mostres el color indica la classe
+# Dibuixem el núvol de punts (el paràmetre c indica que pintem segons la classe)
+plt.scatter(X[:, 0], X[:, 1], c=y)
+
+# Dibuixem la recta. Usem l'equació punt-pendent
+m = -perceptron.w_[1] / perceptron.w_[2]
+origen = (0, -perceptron.w_[0] / perceptron.w_[2])
+plt.axline(xy1=origen, slope=m)
+
+plt.figure(2)
+plt.plot(perceptron.errors_, marker='o')
+plt.xlabel('Epochs')
+plt.ylabel('Number of miss classifications')
 plt.show()
