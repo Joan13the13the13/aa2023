@@ -46,6 +46,7 @@ class Adaline:
 
         for _ in range(self.n_iter):
             # TODO: PUT YOUR CODE HERE
+            continue
 
     def net_output(self, X):
         """Calculate net output"""

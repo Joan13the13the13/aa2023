@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 from sklearn.datasets import make_classification
 # Com les classes es diuen igual basta canviar el fitxer ;)
-from AdaLine_Batch import Adaline
+from AdaLine_SGD import Adaline
 
 # Generació del conjunt de mostres
 X, y = make_classification(n_samples=100, n_features=2, n_redundant=0, n_repeated=0,
