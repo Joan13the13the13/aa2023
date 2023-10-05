@@ -6,6 +6,7 @@ from Adaline import Adaline
 from sklearn.svm import SVC
 
 
+
 # Generació del conjunt de mostres
 X, y = make_classification(n_samples=100, n_features=2, n_redundant=0, n_repeated=0,
                            n_classes=2, n_clusters_per_class=1, class_sep=2,
@@ -24,7 +25,9 @@ y_prediction = perceptron.predict(X)
 #Entrenam una SVM linear (classe SVC)
 
 # TODO
-
+# Entrenar una SVM lineal
+modelo_svm = SVC(C=1000,kernel='linear')
+modelo_svm.fit(X_transformed, y)
 
 plt.figure(1)
 
@@ -40,6 +43,13 @@ plt.axline(xy1=origen, slope=m, c="blue", label="Adaline")
 #plt.axline(xy1= TODO, slope= TODO, c="green", label="SVM")
 #plt.scatter( TODO, facecolors="none", edgecolors="green")
 
+# Obtener la pendiente y el punto de intercepción con el eje y del hiperplano de la SVM
+m_svm = -modelo_svm.coef_[0][0] / modelo_svm.coef_[0][1]
+origen_svm = (0, -modelo_svm.intercept_[0] / modelo_svm.coef_[0][1])
+plt.axline(xy1=origen_svm, slope=m_svm, c="green", label="SVM")
+# Mostrar los puntos de las dos clases con diferentes colores
+plt.scatter(X_transformed[y == -1][:, 0], X_transformed[y == -1][:, 1], c='red', marker='o', label='Clase -1')
+plt.scatter(X_transformed[y == 1][:, 0], X_transformed[y == 1][:, 1], c='blue', marker='x', label='Clase 1')
 
 plt.legend()
 plt.show()
